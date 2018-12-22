@@ -71,5 +71,4 @@ public class SerialProperties {
     public int getFlowControl() {
         return flowControl;
     }
-
 }

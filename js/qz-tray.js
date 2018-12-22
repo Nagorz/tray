@@ -1159,7 +1159,9 @@ var qz = (function() {
              * Any responses from the device will be sent to serial callback functions.
              *
              * @param {string} port An open port to send data over.
-             * @param {string} data The data to send to the serial device.
+             * @param {string|Object} data The object containing data and metadata to send to the serial device.
+             *  @param {string} [data.type='PLAIN'] Valid values <code>[PLAIN | FILE]</code>
+             *  @param {string} data.data The data to send to the serial device.
              * @param {Object} [properties] Properties of data being sent over the serial port.
              *  @param {string} [properties.baudRate=9600]
              *  @param {string} [properties.dataBits=8]
@@ -1174,6 +1176,12 @@ var qz = (function() {
              * @memberof qz.serial
              */
             sendData: function(port, data, properties) {
+                if (typeof data !== 'object') {
+                    data = {
+                        data: data,
+                        type: "PLAIN"
+                    }
+                }
                 var params = {
                     port: port,
                     data: data,
